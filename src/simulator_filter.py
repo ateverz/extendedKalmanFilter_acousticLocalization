@@ -1,8 +1,13 @@
+## add src to the path
+import sys
+sys.path.append('src')
+
 import acousticLocalizationSim as ac
 import matplotlib.pyplot as plt
 import numpy as np
 import math
 from filterpy.kalman import KalmanFilter
+from scipy import stats
 
 class Robot:
     def __init__(self, x0=0, y0=0, d = 0.1):
@@ -32,7 +37,7 @@ ysF = []
 xr = [10]
 yr = [-18]
 
-robot = Robot(x0 = xr[0], y0 = yr[0], d = 10)
+robot = Robot(x0 = xr[0], y0 = yr[0], d =8)
 
 ## Calculate first step according to the angle between robot and speaker
 th = speaker.get_relativeAngle([xr[0],yr[0]])
@@ -55,7 +60,7 @@ ys.append(S[1])
 ## Kalman filter settings
 kf = KalmanFilter(dim_x=2, dim_z=2)
 kf.x = np.array(S)
-kp = 1
+kp = 0.1
 kf.R *= kp * noise_std * np.eye(2)
 kf.Q *= 0 #noise_std * np.eye(2)
 kf.P *= kp * noise_std * np.eye(2)
@@ -74,7 +79,7 @@ check = 5000
 
 th = speaker.get_relativeAngle([xr[-1],yr[-1]])
 
-for i in range(1000):
+for i in range(100):
     sigma = robot.move(th)
 
     xr.append(sigma[0])
@@ -101,7 +106,7 @@ for i in range(1000):
 
     k += 1
 
-    if math.sqrt((xsF[-1] - speaker_real_position[0])**2 + (ysF[-1] - speaker_real_position[1])**2) <= 0.1:
+    if math.sqrt((xsF[-1] - speaker_real_position[0])**2 + (ysF[-1] - speaker_real_position[1])**2) <= 1:
         print('Converged at iteration: ', k)
         break
 
@@ -114,7 +119,7 @@ ax1 = plt.subplot2grid((2,7), (0,0), colspan=4, rowspan=2)
 ax2 = plt.subplot2grid((2,7), (0,4), colspan=3)
 ax3 = plt.subplot2grid((2,7), (1,4), colspan=3)
 
-alpha = np.linspace(0.03,0,np.size(xr))
+alpha = np.linspace(0.1,0,np.size(xr))
 
 ax1.plot(xr, yr, 'g--', label='Robot')
 
@@ -122,15 +127,12 @@ for i in range(np.size(xs)):
     ax1.plot(xs[i], ys[i], 'ro', alpha=alpha[i]*2)
     ax1.plot(xsF[i], ysF[i], 'ko', alpha=alpha[i])
 
-#ax1.plot(xs,ys, 'ro', alpha=0.1)
-#ax1.plot(xsF,ysF, 'ko', alpha=0.1)
-
-#ax1.plot(xs, ys, 'xr')
-#ax1.plot(xsF, ysF, 'xk')
 ax1.plot(speaker_real_position[0],speaker_real_position[1], 'bo', label='Speaker')
 ax1.plot(xr[0], yr[0], 'go')
+ax1.plot(np.mean(xs), np.mean(ys), 'ro', label = 'Mean measurement')
+ax1.plot(stats.mode(xs), stats.mode(ys), 'yo', label = 'Mode measurement')
 ax1.plot(xsF[-1], ysF[-1], 'ko')
-#ax1.plot(xs[0], ys[0], 'r*')
+#ax1.legend(loc='best')
 ax1.set_ylim(-20, 20)
 ax1.set_xlim(-20, 20)
 
@@ -160,12 +162,13 @@ for sbp in fig.axes:
 
 plt.tight_layout()
 
-fig.legend(handles, labels, loc='upper right', ncol=len(handles))
+fig.legend(handles, labels, loc='upper right', ncol=len(handles), prop={'size': 6})
 plt.subplots_adjust(left=0.1, right=0.99, top=0.9, bottom=0.1)
 
+folder = '/home/ateveraz/Documents/phd/projects/extendedKalmanFilter_acousticLocalization/doc/images/'
+plt.savefig(folder + 'simulator_filter.pdf', format='pdf', dpi=300)
 
 plt.show()
-
 
 print('Real position:', speaker_real_position)
 print('Filtered position (KF):', [xsF[-1], ysF[-1]])
