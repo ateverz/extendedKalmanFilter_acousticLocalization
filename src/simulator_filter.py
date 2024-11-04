@@ -2,28 +2,17 @@
 import sys
 sys.path.append('src')
 
-import acousticLocalizationSim as ac
+import simulator
 import matplotlib.pyplot as plt
 import numpy as np
 import math
 from filterpy.kalman import KalmanFilter
 from scipy import stats
 
-class Robot:
-    def __init__(self, x0=0, y0=0, d = 0.1):
-        self.x = x0
-        self.y = y0
-        self.d = d
-
-    def move(self, th_):
-        self.x += (math.cos(th_) + math.sin(th_)) * self.d
-        self.y += (math.sin(th_) - math.cos(th_)) * self.d
-        return self.x, self.y
-
 # Speaker settings
 speaker_real_position = (-10, 10)
 noise_std = math.pi/10
-speaker = ac.AcousticLocalizationSim(pos=speaker_real_position, noise_std = noise_std, noisy=True)
+speaker = simulator.Acoustic(pos=speaker_real_position, noise_std = noise_std, noisy=True)
 
 ## Estimated position
 xs = []
@@ -37,10 +26,10 @@ ysF = []
 xr = [10]
 yr = [-18]
 
-robot = Robot(x0 = xr[0], y0 = yr[0], d =8)
+robot = simulator.Robot(x0 = xr[0], y0 = yr[0], d =8)
 
 ## Calculate first step according to the angle between robot and speaker
-th = speaker.get_relativeAngle([xr[0],yr[0]])
+th = speaker.angleRespectTo([xr[0], yr[0]])
 sigma = robot.move(th)
 
 
@@ -77,7 +66,7 @@ k = 0
 
 check = 5000
 
-th = speaker.get_relativeAngle([xr[-1],yr[-1]])
+th = speaker.angleRespectTo([xr[-1], yr[-1]])
 
 for i in range(100):
     sigma = robot.move(th)
@@ -102,7 +91,7 @@ for i in range(100):
     r1 = np.array([xr[-1], yr[-1]])
 
     ## Compute angle between robot and speaker
-    th = speaker.get_relativeAngle(r1)
+    th = speaker.angleRespectTo(r1)
 
     k += 1
 
