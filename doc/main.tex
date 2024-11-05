@@ -17,11 +17,44 @@
 \date{\today}
 \maketitle
 
-% \tableofcontents
+\section{Numerical simulations}
 
-%\chapter{Introduction}
+\subsection{The simulator}
 
-\section{Simulations}
-State the objectives of the report here.
+The speaker is placed at $(-10,10)$, where the robot starts at $(18,-18)$. At this point, the robot receives the angular estimation based on a simulated acoustic algorithm, which has a Gaussian noisy with $\mu=0$ and $\sigma = 0.05 \pi \approx \pm 9 \deg$.
+
+Given the noisied angular estimation, an Extended Kalman Filter is proposed under two different scenarios:
+%
+\begin{itemize}
+    \item \textbf{Angular filter:} The filter is applied to the angular estimation received from the acoustic algorithm. Then, the next position as well as the estimated position is calculated based on that.
+    \item \textbf{Cartesian filter:} The filter is applied to the cartesian position of the robot. The next position is calculated based on the noisy angular estimation, and then the filter is applied to the cartesian position. However, the filtered position is used to compute the angular value after some iterations. 
+\end{itemize}
+
+\subsection{Results}
+
+\begin{table}[h!]
+    \centering
+    \caption{Filter performance metrics}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        \textbf{Filter Applied} & \textbf{Iterations} & \textbf{Mean} & \textbf{Max} & \textbf{Min} & \textbf{Std} & \textbf{Estimated Position} \\
+        \hline
+        None       & 29 & 1.4098 & 1.9284 & 0.7795 & 0.4873 & $[-9.4772, 10.6774]$ \\
+        Angular    & 25 & 1.1365 & 2.1861 & 0.6462 & 0.5428 & $[-10.9742, 10.3782]$ \\
+        Cartesian  & \textbf{21} & \textbf{0.9375} & \textbf{1.4930} & \textbf{0.6081} & \textbf{0.3200} & $[-9.8546, 9.0827]$ \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/estimationPerAxis.pdf}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/trajectory.pdf}
+\end{figure}
+
 
 \end{document}

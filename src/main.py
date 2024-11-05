@@ -20,7 +20,7 @@ def createRobot(to_filter):
 rCartesian = createRobot('cartesian')
 rAngular = createRobot('angular')
 rNone = createRobot('none')
-results = sim.Results('/home/ateveraz/Documents/phd/projects/extendedKalmanFilter_acousticLocalization/doc/images/')
+results = sim.Results('/home/ateveraz/Documents/phd/projects/extendedKalmanFilter_acousticLocalization/src/images/')
 
 
 # Main loop

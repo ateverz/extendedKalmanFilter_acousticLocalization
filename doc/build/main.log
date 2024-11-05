@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.10.2)  31 OCT 2024 08:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.10.2)  5 NOV 2024 18:33
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -338,29 +338,47 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 LaTeX Warning: No \author given.
 
+
+Overfull \hbox (34.21559pt too wide) in paragraph at lines 38--47
+ [][] 
+ []
+
+<images/estimationPerAxis.pdf, id=16, 867.24pt x 650.43pt>
+File: images/estimationPerAxis.pdf Graphic file (type pdf)
+<use images/estimationPerAxis.pdf>
+Package pdftex.def Info: images/estimationPerAxis.pdf  used on input line 51.
+(pdftex.def)             Requested size: 362.37569pt x 271.77934pt.
+<images/trajectory.pdf, id=17, 578.16pt x 578.16pt>
+File: images/trajectory.pdf Graphic file (type pdf)
+<use images/trajectory.pdf>
+Package pdftex.def Info: images/trajectory.pdf  used on input line 56.
+(pdftex.def)             Requested size: 362.37569pt x 362.37247pt.
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (build/main.aux)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2 <./images/estimationPerAxis.pdf> <./images/trajectory.pdf
+
+pdfTeX warning: pdflatex (file ./images/trajectory.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>] (build/main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 31F329A13F8667F0D69FF163510A56F1;98.
+(rerunfilecheck)             Checksum: 00055981614FFF258A9B883FD69509E6;368.
  ) 
 Here is how much of TeX's memory you used:
- 10024 strings out of 476106
- 151850 string characters out of 5793933
- 1924975 words of memory out of 5000000
- 31928 multiletter control sequences out of 15000+600000
- 561871 words of font info for 51 fonts, out of 8000000 for 9000
+ 10080 strings out of 476106
+ 152913 string characters out of 5793933
+ 1936975 words of memory out of 5000000
+ 31972 multiletter control sequences out of 15000+600000
+ 567169 words of font info for 71 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 75i,6n,79p,335b,440s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on build/main.pdf (1 page, 35115 bytes).
+ 75i,9n,79p,441b,447s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </home/ateveraz/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on build/main.pdf (2 pages, 93354 bytes).
 PDF statistics:
- 33 PDF objects out of 1000 (max. 8388607)
- 23 compressed objects within 1 object stream
- 3 named destinations out of 1000 (max. 500000)
- 9 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 147 PDF objects out of 1000 (max. 8388607)
+ 58 compressed objects within 1 object stream
+ 7 named destinations out of 1000 (max. 500000)
+ 35 words of extra memory for PDF output out of 10000 (max. 10000000)
 
